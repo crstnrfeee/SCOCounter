@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="us-ascii">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom right, rgba(0, 128, 255, 1), rgba(1, 56, 95, 1)); /* Reversed gradient */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 374px; /* Increased max-width to 110% */
+            margin: 30px;
+            padding: 0px;
+            background-color: none;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            background: linear-gradient(to bottom, rgba(254, 242, 0, 1), rgba(254, 150, 95, 5)); /* Reversed gradient */
+            color: black;
+            padding: 5px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            width: 102%;
+        }
+        .inner-container {
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)); /* Reversed gradient */
+            color: black;
+            padding: 8px;
+            border-radius: 9px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container-padding2 {
+            max-width: 374px; /* Increased max-width to 110% */
+            margin: 20px;
+            padding: 0px;
+            background-color: none;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+        .container-padding3 {
+            max-width: 374px; /* Increased max-width to 110% */
+            margin: 20px;
+            padding: 0px;
+            background-color: none;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .new-container {
+            max-width: 375px; /* Increased max-width to 110% */
+            margin: 0px;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)); /* Reversed gradient */
+            color: black;
+            border-radius: 9px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { margin: 0; font-size: 1.32em; }
+        .result, .rate {
+            margin-top: 8px;
+            font-size: 1.2em; /* Increased font size */
+            padding: 8px; /* Increased padding */
+            border: 1px solid #555;
+            border-radius: 6px;
+            background-color: rgba(200, 200, 200, 0.5);
+            color: black;
+            width: 100%; /* Same width */
+            max-width: 250px; /* Set a maximum width */
+        }
+        h3 { margin: 0; font-size: 1.10em; }
+        .result, .rate {
+            margin-top: 3px;
+            font-size: 1.2em; /* Increased font size */
+            padding: 8px; /* Increased padding */
+            border: 1px solid #555;
+            border-radius: 6px;
+            background-color: rgba(200, 200, 200, 0.5);
+            color: black;
+            width: 100%; /* Same width */
+            max-width: 250px; /* Set a maximum width */
+        }
+        h4 { margin: 0; font-size: 1.10em; }
+        .result, .rate {
+            margin-top: 3px;
+            font-size: 1em; /* Increased font size */
+            padding: 8px; /* Increased padding */
+            border: 1px solid #555;
+            border-radius: 6px;
+            background-color: rgba(200, 200, 200, 0.5);
+            color: black;
+            width: 100%; /* Same width */
+            max-width: 250px; /* Set a maximum width */
+        }
+        button {
+            margin: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover { background-color: #555; }
+        .running {
+            animation: pulse 1s infinite;
+        }
+        buttonred {
+            margin: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        buttonred:hover { background-color: #555; }
+        .running {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4px 0;
+        }
+        label { 
+            margin-right: 4px;
+            width: 66px;
+            text-align: right; 
+            font-size: 12.5px;
+        }
+        input {
+            width: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            color: black;
+            padding: 4px;
+        }
+        input:focus { outline: none; border-color: #00ff7f; }
+        .footer-text {
+            position: fixed; 
+            bottom: 5px; 
+            right: 5px; 
+            font-size: 11px; 
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .hidden {
+            display: none; 
+        }
+        #startStopButton {
+            background-color: #007bff; 
+            font-weight: bold;
+            width: 88px;
+        }
+        .elapsed-time {
+            margin-left: 8px; 
+            font-size: 0.88em; 
+            min-width: 110px; 
+            width: 132px; 
+            text-align: left; 
+            white-space: nowrap; 
+        }
+        .reset-screenshot-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BBSCO Call Counter</h1>
+        </div>
+        <div class="inner-container" id="screenshotArea1">
+            <div class="button-container">
+                <button id="startStopButton" aria-label="Start/Stop counting">Start</button>
+                <span class="elapsed-time" id="elapsedTime">Elapsed Time: 0s</span>
+            </div>
+            <div class="button-container">
+                <button id="callButton" aria-label="Record a call">Call</button>
+                <button id="caseButton" aria-label="Record a case">Case</button>
+                <button id="transferButton" aria-label="Record a transfer">Transfer</button>
+            </div>
+            <div class="input-group">
+                <label>Calls:</label>
+                <input type="number" id="callCountInput" value="0" min="0">
+            </div>
+            <div class="input-group">
+                <label>Cases:</label>
+                <input type="number" id="caseCountInput" value="0" min="0">
+            </div>
+            <div class="input-group">
+                <label>Transfers:</label>
+                <input type="number" id="transferCountInput" value="0" min="0">
+            </div>
+            <div id="result" class="result">AHT: N/A</div>
+            <div id="caseRate" class="rate">Case rate: N/A</div>
+            <div id="transferRate" class="rate">Transfer rate: N/A</div>
+            <div class="reset-screenshot-container">
+                <button id="resetButton" aria-label="Reset all data">Reset</button>
+                <button id="screenshotButton" aria-label="Take a screenshot">Screenshot</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-padding2">
+    <div class="container2" id="screenshotArea2">
+        <div class="new-container">
+    <h1 style="margin: 0px 0;">Transfer Departments<br></h1>
+    <button id="primaryCareBtn">Primary Care</button>
+    <button id="computingServicesBtn">Computing Services</button>
+    <buttonred id="totalTechBtn">Totaltech</buttonred>
+    <button id="ambrBtn">AMBR</button>
+    <button id="homeServicesBtn">Home Services</button>
+    <button id="autoTechBtn">Autotech Services</button>
+    <button id="others2Btn">Others</button>
+
+    <div class="counter">
+    <h4 style="margin: 3px 0;">Top 3 Selected:</h4>
+    <div id="topThreeContainer"></div>
+    </div>
+	
+    <div class="reset-screenshot-container">
+        <button id="resetButton2" aria-label="Reset all data">Reset</button>
+        <button id="screenshotButton2" aria-label="Take a screenshot">Screenshot</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <div class="container-padding3">
+    <div class="container3" id="screenshotArea3">
+    	<div class="new-container">
+        <h1 style="margin: px 0;">&ensp;&ensp;&ensp;&ensp;Call Drivers&ensp;&ensp;&ensp;&ensp;<br></h1>
+        <button id="orderStatusBtn">Order Status</button>
+        <button id="storeAppointmentsBtn">Store Appointments</button>
+        <button id="homeAppointmentsBtn">Home Appointments</button>
+        <button id="generalQuestionsBtn">General Questions</button>
+        <button id="priceMatchBtn">Price Match</button>
+        <button id="productAvailabilityBtn">Product Availability</button>
+        <button id="others3Btn">Others</button>
+
+        <div class="counter">
+    <h4 style="margin: 3px 0;">Top 3 Selected:</h4>
+            <div id="topThreeContainerNew"></div>
+        </div>  
+        
+        <div class="reset-screenshot-container">
+            <button id="resetButton3" aria-label="Reset all data">Reset</button>
+            <button id="screenshotButton3" aria-label="Take a screenshot">Screenshot</button>
+        </div>
+    </div>
+</div>
+    <button id="fullScreenshotButton" style="
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        z-index: 1000;
+        cursor: pointer;
+    ">Save</button>
+
+
+    <div class="footer-text" id="footerText">SCOCV2.1</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+
+    const counters = {
+        primaryCare: 0,
+        computingServices: 0,
+        totalTech: 0,
+        ambr: 0,
+        homeServices: 0,
+        autoTech: 0,
+        others: 0
+    };
+
+function updateTopThree() {
+    const topThreeContainer = document.getElementById('topThreeContainer');
+    topThreeContainer.style.height = '60.5px';
+    topThreeContainer.innerHTML = '';
+
+    const sortedDepartments = Object.entries(counters)
+        .sort((a, b) => b[1] - a[1])
+        .filter(([_, count]) => count > 0)
+        .slice(0, 3);
+
+    if (sortedDepartments.length === 0) {
+        topThreeContainer.innerHTML = `<h3>N/A</h3>`;
+    } else {
+        sortedDepartments.forEach(([department, count]) => {
+            const departmentName = department.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            topThreeContainer.innerHTML += `<p style="margin: 2px 0;">${departmentName}: ${count}</p>`;
+        });
+    }
+
+    topThreeContainer.innerHTML += `<div style="height: ${3 - sortedDepartments.length}em;"></div>`;
+}
+
+    document.getElementById('primaryCareBtn').addEventListener('click', () => {
+        counters.primaryCare++;
+        updateTopThree();
+    });
+
+    document.getElementById('computingServicesBtn').addEventListener('click', () => {
+        counters.computingServices++;
+        updateTopThree();
+    });
+
+    document.getElementById('totalTechBtn').addEventListener('click', () => {
+        counters.totalTech++;
+        updateTopThree();
+    });
+
+    document.getElementById('ambrBtn').addEventListener('click', () => {
+        counters.ambr++;
+        updateTopThree();
+    });
+
+    document.getElementById('homeServicesBtn').addEventListener('click', () => {
+        counters.homeServices++;
+        updateTopThree();
+    });
+
+    document.getElementById('autoTechBtn').addEventListener('click', () => {
+        counters.autoTech++;
+        updateTopThree();
+    });
+
+    document.getElementById('others2Btn').addEventListener('click', () => {
+        counters.others++;
+        updateTopThree();
+    });
+
+    document.getElementById('resetButton2').addEventListener('click', () => {
+        for (let key in counters) {
+            counters[key] = 0;
+        }
+        updateTopThree();
+    });
+
+
+    updateTopThree();
+    const countersNew = {
+        orderStatus: 0,
+        storeAppointments: 0,
+        homeAppointments: 0,
+        generalQuestions: 0,
+        priceMatch: 0,
+        productAvailability: 0,
+        others: 0
+    };
+
+function updateTopThreeNew() {
+    const topThreeContainer = document.getElementById('topThreeContainerNew');
+    topThreeContainer.style.height = '60.5px';
+    topThreeContainer.innerHTML = '';
+
+    const sortedDepartments = Object.entries(countersNew)
+        .sort((a, b) => b[1] - a[1])
+        .filter(([_, count]) => count > 0)
+        .slice(0, 3);
+
+    if (sortedDepartments.length === 0) {
+        topThreeContainer.innerHTML = `<h3>N/A</h3>`;
+    } else {
+        sortedDepartments.forEach(([department, count]) => {
+            const departmentName = department.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            topThreeContainer.innerHTML += `<p style="margin: 2px 0;">${departmentName}: ${count}</p>`;
+        });
+    }
+
+    topThreeContainerNew.innerHTML += `<div style="height: ${3 - sortedDepartments.length}em;"></div>`;
+}
+
+    document.getElementById('orderStatusBtn').addEventListener('click', () => {
+        countersNew.orderStatus++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('storeAppointmentsBtn').addEventListener('click', () => {
+        countersNew.storeAppointments++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('homeAppointmentsBtn').addEventListener('click', () => {
+        countersNew.homeAppointments++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('generalQuestionsBtn').addEventListener('click', () => {
+        countersNew.generalQuestions++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('priceMatchBtn').addEventListener('click', () => {
+        countersNew.priceMatch++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('productAvailabilityBtn').addEventListener('click', () => {
+        countersNew.productAvailability++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('others3Btn').addEventListener('click', () => {
+        countersNew.others++;
+        updateTopThreeNew();
+    });
+
+    document.getElementById('resetButton3').addEventListener('click', () => {
+        for (let key in countersNew) {
+            countersNew[key] = 0;
+        }
+        updateTopThreeNew();
+    });
+
+    updateTopThreeNew();
+
+
+
+
+        document.getElementById('screenshotButton3').addEventListener('click', function() {
+            const screenshotArea = document.getElementById('screenshotArea3');
+            const footerText = document.getElementById('footerText');
+            footerText.classList.add('hidden'); 
+
+            html2canvas(screenshotArea3, {
+                useCORS: true,
+                scale: window.devicePixelRatio,
+                backgroundColor: null 
+            }).then(canvas => {
+                canvas.toBlob(async (blob) => {
+                    if (blob) {
+                        try {
+                            await navigator.clipboard.write([new ClipboardItem({
+                                [blob.type]: blob
+                            })]);
+                            alert("Screenshot copied to clipboard!");
+                        } catch (err) {
+                            console.error("Failed to copy: ", err);
+                        }
+                    }
+                });
+
+                footerText.classList.remove('hidden'); 
+            });
+        });
+
+        document.getElementById('screenshotButton2').addEventListener('click', function() {
+            const screenshotArea = document.getElementById('screenshotArea2');
+            const footerText = document.getElementById('footerText');
+            footerText.classList.add('hidden'); 
+
+            html2canvas(screenshotArea2, {
+                useCORS: true,
+                scale: window.devicePixelRatio,
+                backgroundColor: null 
+            }).then(canvas => {
+                canvas.toBlob(async (blob) => {
+                    if (blob) {
+                        try {
+                            await navigator.clipboard.write([new ClipboardItem({
+                                [blob.type]: blob
+                            })]);
+                            alert("Screenshot copied to clipboard!");
+                        } catch (err) {
+                            console.error("Failed to copy: ", err);
+                        }
+                    }
+                });
+
+                footerText.classList.remove('hidden'); 
+            });
+        });
+        const caseRateThreshold = 49;
+        const transferRateThreshold = 21;
+
+        let callTimestamps = [];
+        let countingActive = false;
+        let lastStartTime = null;
+        let stopwatchInterval;
+        let elapsedSeconds = 0;
+
+        document.getElementById('startStopButton').addEventListener('click', function() {
+               countingActive = !countingActive;
+            if (countingActive) {
+                this.innerText = 'Stop';
+                this.classList.add('running');
+                lastStartTime = Date.now();
+                startStopwatch();
+            } else {
+                this.innerText = 'Start';
+                this.classList.remove('running');
+                stopStopwatch();
+                resetStopwatch(); 
+            }
+        });
+
+        document.getElementById('callButton').addEventListener('click', function() {
+            if (countingActive) {
+                let callCount = parseInt(document.getElementById('callCountInput').value);
+                callCount++;
+                document.getElementById('callCountInput').value = callCount;
+                if (lastStartTime !== null) {
+                    callTimestamps.push(Date.now() - lastStartTime);
+                    lastStartTime = Date.now();
+                }
+                updateResults();
+                resetStopwatch();
+            }
+        });
+
+        document.getElementById('caseButton').addEventListener('click', function() {
+            if (countingActive) {
+                let callCount = parseInt(document.getElementById('callCountInput').value);
+                let caseCount = parseInt(document.getElementById('caseCountInput').value);
+                if (caseCount < callCount) {
+                    caseCount++;
+                    document.getElementById('caseCountInput').value = caseCount;
+                    updateResults();
+                } else {
+                    alert("Cases cannot exceed Calls.");
+                }
+            }
+        });
+
+        document.getElementById('transferButton').addEventListener('click', function() {
+            if (countingActive) {
+                let callCount = parseInt(document.getElementById('callCountInput').value);
+                let transferCount = parseInt(document.getElementById('transferCountInput').value);
+                if (transferCount < callCount) {
+                    transferCount++;
+                    document.getElementById('transferCountInput').value = transferCount;
+                    updateResults();
+                } else {
+                    alert("Transfers cannot exceed Calls.");
+                }
+            }
+        });
+
+        document.getElementById('callCountInput').addEventListener('input', updateResults);
+        document.getElementById('caseCountInput').addEventListener('input', function() {
+            validateInputs();
+            updateResults(); 
+        });
+        document.getElementById('transferCountInput').addEventListener('input', function() {
+            validateInputs();
+            updateResults(); 
+        });
+	document.getElementById('resetButton').addEventListener('click', function() {
+    	document.getElementById('callCountInput').value = 0;
+    	document.getElementById('caseCountInput').value = 0;
+    	document.getElementById('transferCountInput').value = 0;
+
+    	countingActive = false;
+
+    	document.getElementById('result').innerText = 'AHT: N/A';
+   	document.getElementById('caseRate').innerText = 'Case rate: N/A';
+    	document.getElementById('transferRate').innerText = 'Transfer rate: N/A';
+    
+    		callTimestamps = [];
+    		stopStopwatch();
+    		resetStopwatch();
+
+    	document.getElementById('startStopButton').innerText = 'Start';
+    	document.getElementById('startStopButton').classList.remove('running');
+
+    	document.getElementById('result').style.color = 'black';
+    	document.getElementById('caseRate').style.color = 'black';
+    	document.getElementById('transferRate').style.color = 'black';
+});
+
+        document.getElementById('screenshotButton').addEventListener('click', function() {
+            const screenshotArea = document.getElementById('screenshotArea1');
+            const footerText = document.getElementById('footerText');
+            footerText.classList.add('hidden'); 
+
+            html2canvas(screenshotArea, {
+                useCORS: true,
+                scale: window.devicePixelRatio,
+                backgroundColor: null 
+            }).then(canvas => {
+                canvas.toBlob(async (blob) => {
+                    if (blob) {
+                        try {
+                            await navigator.clipboard.write([new ClipboardItem({
+                                [blob.type]: blob
+                            })]);
+                            alert("Screenshot copied to clipboard!");
+                        } catch (err) {
+                            console.error("Failed to copy: ", err);
+                        }
+                    }
+                });
+
+                footerText.classList.remove('hidden'); 
+            });
+        });
+
+        function updateResults() {
+            let callCount = parseInt(document.getElementById('callCountInput').value);
+            let caseCount = parseInt(document.getElementById('caseCountInput').value);
+            let transferCount = parseInt(document.getElementById('transferCountInput').value);
+
+            let caseRate = callCount ? (caseCount / callCount * 100).toFixed(2) : 0;
+            let transferRate = callCount ? (transferCount / callCount * 100).toFixed(2) : 0;
+
+            let aht = calculateAHT(callTimestamps);
+            if (aht !== null) {
+                let ahtDisplay = aht < 60 ? `${aht.toFixed(2)}s` : `${(aht / 60).toFixed(2)}m`;
+                document.getElementById('result').innerText = `AHT: ${ahtDisplay}`;
+                document.getElementById('result').style.color = aht > 240 ? 'red' : 'green';
+            } else {
+                document.getElementById('result').innerText = 'AHT: N/A';
+                document.getElementById('result').style.color = 'black'; 
+            }
+
+            document.getElementById('caseRate').innerText = 'Case rate: ' + caseRate + '%';
+            document.getElementById('transferRate').innerText = 'Transfer rate: ' + transferRate + '%';
+            document.getElementById('caseRate').style.color = caseRate > 49.9999999999 ? 'green' : 'red';
+            document.getElementById('transferRate').style.color = transferRate > 16.000000000000000000000001 ? 'red' : 'green';
+        }
+
+        function validateInputs() {
+            let callCount = parseInt(document.getElementById('callCountInput').value);
+            let caseCount = parseInt(document.getElementById('caseCountInput').value);
+            let transferCount = parseInt(document.getElementById('transferCountInput').value);
+            
+            if (caseCount > callCount) {
+                alert("Cases cannot exceed Calls.");
+                document.getElementById('caseCountInput').value = callCount;
+            }
+            
+            if (transferCount > callCount) {
+                alert("Transfers cannot exceed Calls.");
+                document.getElementById('transferCountInput').value = callCount;
+            }
+        }
+
+        function calculateAHT(timestamps) {
+            if (timestamps.length === 0) return null; 
+            let totalTime = timestamps.reduce((acc, curr) => acc + curr, 0) / 1000; 
+            return totalTime / timestamps.length; 
+        }
+
+        function startStopwatch() {
+            stopwatchInterval = setInterval(() => {
+                elapsedSeconds++;
+                document.getElementById('elapsedTime').innerText = `Elapsed Time: ${elapsedSeconds}s`;
+            }, 1000);
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+        }
+
+        function resetStopwatch() {
+            elapsedSeconds = 0;
+            document.getElementById('elapsedTime').innerText = `Elapsed Time: 0s`;
+        }
+document.getElementById('fullScreenshotButton').addEventListener('click', function() {
+    html2canvas(document.body).then(function(canvas) {
+        let now = new Date();
+        let phTime = new Date(now.getTime() + (8 * 60 * 60 * 1000));
+        let month = String(phTime.getUTCMonth() + 1).padStart(2, '0');
+        let day = String(phTime.getUTCDate()).padStart(2, '0');
+        let year = phTime.getUTCFullYear();
+        let hours = phTime.getUTCHours();
+        let minutes = String(phTime.getUTCMinutes()).padStart(2, '0');
+        let seconds = String(phTime.getUTCSeconds()).padStart(2, '0');
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        let formattedTime = `${hours};${minutes}${ampm}`;
+        let formattedDateTime = `${month}-${day}-${year}_${formattedTime}`;
+        var link = document.createElement('a');
+        link.href = canvas.toDataURL('image/jpeg');
+        link.download = `counter_${formattedDateTime}.jpg`;
+        link.click();
+    });
+});
+    </script>
+</body>
+</html>
